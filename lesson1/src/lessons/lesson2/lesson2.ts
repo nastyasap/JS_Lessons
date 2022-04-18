@@ -23,6 +23,36 @@ console.log('lesson 2');
 
 // Task 01
 // Реализовать функцию sum которая суммирует 2 числа следующим образом sum(3)(6) === 9
+// function sum(a: number) {
+//     function inner(b:number) {
+//         let c = a + b
+//         return c
+//     }
+//     return inner
+// }
+
+function sum(arg: number) {
+    return function (arg2: number) {
+        return arg + arg2
+    }
+}
+
+console.log(sum(3)(6))
+
+// let a = 100
+//
+// function someFunc(callback: Function) {
+//     let a = 10
+//     return callback(a)
+// }
+//
+// let call = (arg: number) => {
+//     console.log(a)
+//     console.log(arg)
+// }
+//
+// console.log(someFunc(call))
+
 
 // Task 02
 // Реализовать функцию makeCounter которая работает следующим образом:
@@ -33,6 +63,32 @@ console.log('lesson 2');
 // counter2(); // 1
 // counter(); // 3
 
+// let globalScope = {
+//     outerScope: null,
+//     makeCounter: 'Function',
+//     counter: 'Function'
+//
+// }
+//
+// function makeCounter() {
+//     let fScope = {
+//         outerScope: globalScope,
+//         function: 'Function',
+//         a: 2, // 0 -> 1 -> 2
+//     }
+//     let a = 0
+//     return function () {
+//         let innerFScope = {
+//             outerScope: fScope
+//         }
+//         return a+=1
+//     }
+// }
+//
+// const counter = makeCounter()
+// counter()
+// counter()
+
 // Task 03
 // Переписать функцию из Task 02 так, что бы она принимала число в качестве аргумента и это число было стартовым значением счетчика
 // и возвращала следующий объект методов:
@@ -40,6 +96,23 @@ console.log('lesson 2');
 // decrease: -1
 // reset: установить счетчик в 0;
 // set: установить счетчик в заданное значение;
+
+// function makeCounter(arg: number) {
+//     return {
+//         increase: function () {
+//             return arg += 1
+//         },
+//         decrease: function () {
+//             return arg -= 1
+//         },
+//         reset: function () {
+//             return arg = 0
+//         },
+//         set: function (arg2: number) {
+//             return arg = arg2
+//         },
+//     }
+// }
 
 // Task 04*
 // Реализовать функцию superSum которая принимает число в качестве аргумента, которое указывает на количество слагаемых
@@ -51,6 +124,25 @@ console.log('lesson 2');
 // 5) superSum(3)(2,5)(3) //10
 // 6) superSum(3)(2,5)(3,9) //10
 
+function superSum(n: number) {
+    if (n <= 0) return (num: number) => 0
+    if (n === 1) return (num: number) => num
+
+    let outerParams: number[] = []
+
+    function inner(...arg: number[]) {
+        outerParams = [...outerParams, ...arg]
+        if (outerParams.length >= n) {
+            outerParams.length = n
+            outerParams.reduce((acc, el) => acc + el)
+        } else {
+            return inner
+        }
+    }
+
+    return inner
+}
+
 // P.S. типизируйте только аргументы, а при вызове функции используйте @ts-ignore
 
 // Task 05
@@ -60,4 +152,5 @@ console.log('lesson 2');
 // написать функцию, которая повторяет функционал метода flat массива на всю глубину.
 
 // just a plug
-export default () => {};
+export default () => {
+};
