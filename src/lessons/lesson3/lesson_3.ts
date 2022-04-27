@@ -30,7 +30,7 @@ console.log('lesson 3');
 //     }, 2000, {httpStatus: 200, data: {userName: 'Yo', id: 'tytui678', status: 'active'}, error: {}})
 // })
 //0. Куда отправляем запрос
-const requestURL = 'https://jsonplaceholder.typicode.com/users/1/posts'
+// const requestURL = 'https://jsonplaceholder.typicode.com/users/1/posts'
 // 1. Создаём новый XMLHttpRequest-объект
 // let xhr = new XMLHttpRequest();
 // //console.dir(xhr)
@@ -102,10 +102,10 @@ const requestURL = 'https://jsonplaceholder.typicode.com/users/1/posts'
 //     .catch(err => console.log(err))
 
 // для POST-запроса нужно передавать body
-let body = {
-    name: 'Nastya',
-    age: 24
-}
+// let body = {
+//     name: 'Nastya',
+//     age: 24
+// }
 
 // sendRequest('POST', requestURL, body)
 //     .then(data => console.log(data))
@@ -133,29 +133,29 @@ let body = {
 //     .catch(err => console.log(err))
 
 // POST
-function sendRequest(method: string, url: string, body: { name: string, age: number } | null = null) {
-    //нужно передать объект для POST fetch
-    return fetch(url, {
-        method: method,
-        body: JSON.stringify(body),
-        headers: {'Content-Type': 'application/json'}
-    })//обработка ошибок:
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-            return response.json().then(error =>{
-                const e = new Error('Что-то пошло не так')
-                e.name = error
-                throw e
-            })
-        })
-}
-
-sendRequest('POST', requestURL, body)
-    .then(data => console.log(data))
-    .catch(err => console.log(err))
-
+// function sendRequest(method: string, url: string, body: { name: string, age: number } | null = null) {
+//     //нужно передать объект для POST fetch
+//     return fetch(url, {
+//         method: method,
+//         body: JSON.stringify(body),
+//         headers: {'Content-Type': 'application/json'}
+//     })//обработка ошибок:
+//         .then(response => {
+//             if (response.ok) {
+//                 return response.json()
+//             }
+//             return response.json().then(error =>{
+//                 const e = new Error('Что-то пошло не так')
+//                 e.name = error
+//                 throw e
+//             })
+//         })
+// }
+//
+// sendRequest('POST', requestURL, body)
+//     .then(data => console.log(data))
+//     .catch(err => console.log(err))
+//
 
 // just a plug
 export default () => {
